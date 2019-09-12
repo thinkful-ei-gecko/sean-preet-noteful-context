@@ -3,7 +3,10 @@ import FolderList from './FolderList';
 //import NoteList from '../notelist/notelist';
 
 class Note extends Component {
+  //implement context here
+
   render() {
+    //update context below
     const noteId = this.props.match.params.noteId;
     const note = this.props.notes.find(note => note.id === noteId);
 
@@ -23,6 +26,7 @@ class Note extends Component {
                     className="favorite styled"
                     type="button"
                     value="Delete note" /> 
+                    {/* Add in event handler for delete button */}
                 </li>  
                 <li>
                   <p>

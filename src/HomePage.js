@@ -3,8 +3,10 @@ import FolderList from './FolderList';
 import NoteList from './NoteList';
 
 export default class HomePage extends Component {
+  //update context 
 
   render(){
+    //context
     return (
       <main role="main" className="App">
         <section className="main-layout">

@@ -4,7 +4,8 @@ import NoteList from './NoteList';
 
 class Folder extends Component {
   render() {
-
+    //pass in context here 
+    
     const folderId = this.props.match.params.folderId;
     
     return (

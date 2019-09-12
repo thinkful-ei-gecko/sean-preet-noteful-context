@@ -3,16 +3,12 @@ import { Link } from 'react-router-dom';
 
 export default class NoteList extends Component {
 
-  render() {
-    return (
+  //context here 
 
-      // "id": "cbc787a0-ffaf-11e8-8eb2-f2801f1b9fd1",
-      // "name": "Dogs",
-      // "modified": "2019-01-03T00:00:00.000Z",
-      // "folderId": "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
-      // "content": "Blah blah blah ..."
-      
-      <>
+  render() {
+    //update context here
+    return (
+      <div>
         <ul className="notes-list">
           {this.props.notes.map(note =>
             <li key={note.id}>
@@ -24,10 +20,11 @@ export default class NoteList extends Component {
                 className="favorite styled"
                 type="button"
                 value="Delete note" /> 
+                {/* handle delete button */}
             </li>  
           )}
         </ul>
-      </>
+      </div>
     );
   }
 }

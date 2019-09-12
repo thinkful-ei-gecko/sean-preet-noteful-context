@@ -8,10 +8,20 @@ import Folder from './Folder';
 import Note from './Note';
 
 class App extends Component {
+  //update to reflect API request
   state = {
     folders: DummyStore.folders,
     notes: DummyStore.notes,
   }
+
+  //componentDidMount()
+    //fetch API request
+
+
+  //implement handleDelete button here
+  //handleDeleteNote(id){}
+
+  //update code below to refelct context <NoteContext.Provider value ...>
   render() {
     return (
       <>
@@ -34,3 +44,4 @@ class App extends Component {
 }
 
 export default App;
+
