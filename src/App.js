@@ -15,9 +15,42 @@ class App extends Component {
     notes: [],
   }
 
-  fetchApi(){
+  fetchApi(input, input2){
+    const url=('http://localhost:9090/folders');
+    const url2=('http://localhost:9090/notes');
+    console.log(input);
+    if (input === 'folders'){
+    fetch(url)
+    .then(response =>{
+      if (response.ok){
+        return response.json();
+      }
+      throw new Error (response.statusText);
+    })
+    .then (responseJson => this.setState({folders:responseJson}))
+    .catch(err => {
+      console.log("There was an error");
+    })
+   }
+   else
+   fetch(url2)
+    .then(response =>{
+      if (response.ok){
+        return response.json();
+      }
+      throw new Error (response.statusText);
+    })
+    .then (responseJson => this.setState({notes:responseJson}))
+    .catch(err => {
+      console.log("There was an error");
+ })
+}
 
-  }
+
+  // handleDeleteNote(id){
+  //   this.
+  // }
+
 
   componentDidMount(){
     this.fetchApi('folders', 'folders');
@@ -46,6 +79,7 @@ class App extends Component {
           <Route exact path="/" { ...HomePage } />
           <Route exact path="/folder/:folderId" { ...Folder } />
           <Route exact path="/notes/:noteId" { ...Note } />
+
         </>
       </NoteContext.Provider>
     )}
