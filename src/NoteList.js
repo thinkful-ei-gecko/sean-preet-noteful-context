@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import NoteContext from './NoteContext';
 
 export default class NoteList extends Component {
-
-  //context here 
+  static contextType = NoteContext;
 
   render() {
-    //update context here
+    //will need to add in our handeDelete below and update event handler line 25
+    const { notes } = this.context;
+
     return (
       <div>
         <ul className="notes-list">
-          {this.props.notes.map(note =>
+          {notes.map(note =>
             <li key={note.id}>
               <Link to={`/notes/${note.id}`}>
                 {note.name}
