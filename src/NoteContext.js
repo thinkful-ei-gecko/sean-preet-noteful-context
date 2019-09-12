@@ -7,7 +7,9 @@ const NoteContext = React.createContext({
     //then define const {name, setName} = this.context
     //hard way - see below 
     folders:[],
-    notes: []
+    notes: [],
+    addNote : () => {},
+    deleteNote : () => {},
     
 })
 
