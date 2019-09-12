@@ -7,6 +7,7 @@ import HomePage from './HomePage';
 import Folder from './Folder';
 import Note from './Note';
 import NoteContext from './NoteContext';
+import { promised } from 'q';
 
 class App extends Component {
   //update to reflect API request
@@ -19,32 +20,36 @@ class App extends Component {
     const url=('http://localhost:9090/folders');
     const url2=('http://localhost:9090/notes');
     console.log(input);
-    if (input === 'folders'){
-    fetch(url)
-    .then(response =>{
-      if (response.ok){
-        return response.json();
-      }
-      throw new Error (response.statusText);
+    Promise.all([fetch(url), fetch(url2)])
+    .then(([notesRes, folderRes]) => {
+      if (!notesRes.ok)
+        return notesRes.json().then(e=> promised.reject(e))
+      if (!folderRes.ok)
+        return folderRes.json().then(e=> promised.reject(e))
+      return Promise.all([
+        notesRes.json(),
+        folderRes.json(),
+      ])
     })
-    .then (responseJson => this.setState({folders:responseJson}))
+    .then (responseJson => console.log(responseJson))
     .catch(err => {
       console.log("There was an error");
     })
-   }
-   else
-   fetch(url2)
-    .then(response =>{
-      if (response.ok){
-        return response.json();
-      }
-      throw new Error (response.statusText);
-    })
-    .then (responseJson => this.setState({notes:responseJson}))
-    .catch(err => {
-      console.log("There was an error");
- })
-}
+  }
+   
+//    fetch(url2)
+//     .then(response =>{
+//       if (response.ok){
+//         return response.json();
+//       }
+//       throw new Error (response.statusText);
+//     })
+//     .then (responseJson => this.setState({notes:responseJson}))
+//     .catch(err => {
+//       console.log("There was an error");
+//     ])
+//  })
+
 
 
   // handleDeleteNote(id){
@@ -55,7 +60,6 @@ class App extends Component {
   componentDidMount(){
     this.fetchApi('folders', 'folders');
     this.fetchApi('notes', 'notes');
-
   }
     //#2: implement two fetch requests to two endpoints
     // /folders and /notes - store in setStaate in app.js
@@ -76,7 +80,7 @@ class App extends Component {
       }}>
         <>
           <Header />
-          <Route exact path="/" { ...HomePage } />
+          <Route exact path="/" component={ HomePage } />
           <Route exact path="/folder/:folderId" { ...Folder } />
           <Route exact path="/notes/:noteId" { ...Note } />
 

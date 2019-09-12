@@ -8,7 +8,7 @@ export default class NoteList extends Component {
   render() {
     //will need to add in our handeDelete below and update event handler line 25
     const { notes } = this.context;
-
+    console.log(notes);
     return (
       <div>
         <ul className="notes-list">
