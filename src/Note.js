@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import FolderList from './FolderList';
 //import NoteList from '../notelist/notelist';
+import NoteContext from './NoteContext';
 
 class Note extends Component {
-  //implement context here
+  static contextType = NoteContext;
 
   render() {
-    //update context below
+    //will need to add in our handeDelete below and update event handler line 31
+    const { folders, notes } = this.context;
     const noteId = this.props.match.params.noteId;
-    const note = this.props.notes.find(note => note.id === noteId);
+    const note = notes.find(note => note.id === noteId);
 
     return (
       <main role="main" className="App">
         <section className="main-layout">
           <div className="left-menu">
-            <FolderList goBack folders={this.props.folders.filter(folder => folder.id === note.folderId)} selected={note.folderId}/>
+            <FolderList goBack folders={folders.filter(folder => folder.id === note.folderId)} selected={note.folderId}/>
           </div>
 
           <div className="right-content">
